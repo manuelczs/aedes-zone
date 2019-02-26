@@ -2,8 +2,11 @@
   "name": "aedes-zone",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "client": "cd client && npm start",
+    "server": "node server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +20,8 @@
   },
   "homepage": "https://github.com/manuelczs/aedes-zone#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "concurrently": "^4.1.0",
     "csvjson": "^5.1.0",
     "csvtojson": "^2.0.8",
     "express": "^4.16.4",
