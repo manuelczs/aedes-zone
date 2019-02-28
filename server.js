@@ -9,9 +9,10 @@ var path = require('path');
 var csvjson = require('csvjson');
 var bodyParser = require('body-parser');
 
-
+var port = process.env.PORT || 5000;
 app.use(express.static('./public'));
 const port = process.env.PORT || 5000;
+
 
 var request = http.get(URL_CSV, function(response) {
     if (response.statusCode === 200) {
@@ -76,6 +77,7 @@ var provincia = getProvince('', jsontData);
 
 const router = express.Router();
 
+<<<<<<< HEAD:server.js
 router.get('/api/provinces', async (req, res) => {
     console.log("entro");
   res.status(200).json(provincia);
@@ -92,13 +94,31 @@ router.get('/provinces/:nombre', async (req, res) => {
 
 router.get('/api/mensagem', (req, res) => {
   res.send({ express: 'Hello From Express' });
+=======
+router.get('/api/provinces/:nombre', (req, res) => {
+  var nombreProv = req.params.nombre;
+  console.log(nombreProv);
+  res.status(200).json(
+    provincia.find((elem) => { 
+      return elem.provincia == nombreProv
+    })
+  );
 });
 
+router.get('/api/provinces', (req, res) => {
+    console.log("entro");
+  res.status(200).json(provincia);
+>>>>>>> 504ba8f13c7ab6588af437c7638728c96a32a4c8:server.js
+});
 
 app.use(router);
 
 
 
 app.listen(port, () => {
+<<<<<<< HEAD:server.js
 	console.log(`listen in localhost:${port}`);
+=======
+	console.log(`Listening on port ${port}`);
+>>>>>>> 504ba8f13c7ab6588af437c7638728c96a32a4c8:server.js
 })
