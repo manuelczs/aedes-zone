@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .App {
   text-align: center;
 }
@@ -30,4 +31,25 @@
   to {
     transform: rotate(360deg);
   }
+=======
+
+#map {
+  height: 100vh;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+li {
+  cursor: pointer;
+>>>>>>> 504ba8f13c7ab6588af437c7638728c96a32a4c8
 }
