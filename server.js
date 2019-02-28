@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 
 
 app.use(express.static('./public'));
+const port = process.env.PORT || 5000;
 
 var request = http.get(URL_CSV, function(response) {
     if (response.statusCode === 200) {
@@ -38,7 +39,9 @@ var jsontData = JSON.parse(fs.readFileSync('./final-json.in', 'utf8'));
 // Functions
 
 var isIn = (nombre, arr) => {
-    return(arr.some(function(elem){ return elem.provincia == nombre}));
+    return(arr.some(function(elem) { 
+      return elem.provincia == nombre
+    }));
 }
 
 var getProvince = (prov, jss) => {
@@ -66,8 +69,6 @@ var getProvince = (prov, jss) => {
     return provinces
 }
 
-
-
 var provincia = getProvince('', jsontData);
 
 
@@ -75,14 +76,22 @@ var provincia = getProvince('', jsontData);
 
 const router = express.Router();
 
-router.get('/provinces', async (req, res) => {
+router.get('/api/provinces', async (req, res) => {
     console.log("entro");
   res.status(200).json(provincia);
 });
 
 router.get('/provinces/:nombre', async (req, res) => {
-    var nombreProv = req.params.nombre;
-  res.status(200).json(provincia.find(function(elem){ return elem.provincia == nombreProv}));
+  var nombreProv = req.params.nombre;
+  res.status(200).json(provincia.find(
+    function(elem) { 
+      return elem.provincia == nombreProv 
+    }
+    ));
+});
+
+router.get('/api/mensagem', (req, res) => {
+  res.send({ express: 'Hello From Express' });
 });
 
 
@@ -90,6 +99,6 @@ app.use(router);
 
 
 
-app.listen(3000, () => {
-	console.log("listen in localhost:3000");
+app.listen(port, () => {
+	console.log(`listen in localhost:${port}`);
 })
